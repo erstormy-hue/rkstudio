@@ -21,6 +21,7 @@
 
     body {
       min-height: 100vh;
+      animation: vinylspin 120s linear infinite;
       background:
         radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 18%),
         repeating-radial-gradient(
@@ -42,7 +43,7 @@
 
     .shell {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       background: rgba(8, 8, 8, 0.62);
       border: 1px solid rgba(255,255,255,0.10);
@@ -293,7 +294,7 @@
       }
     }
 
-    @media (max-width: 560px) {
+    html
       .page {
         padding: 12px;
       }
@@ -330,6 +331,17 @@
         text-align: center;
       }
     }
+    @keyframes vinylspin {
+
+  from {
+    background-position: center center;
+  }
+
+  to {
+    background-position: center 2000px;
+  }
+
+}
   </style>
 </head>
 <body>
@@ -443,3 +455,4 @@
   </script>
 </body>
 </html>
+
