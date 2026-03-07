@@ -22,11 +22,11 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.04) 0%, transparent 18%),
+        radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 18%),
         repeating-radial-gradient(
           circle at center,
-          rgba(255,255,255,0.025) 0px,
-          rgba(255,255,255,0.025) 2px,
+          rgba(255,255,255,0.02) 0px,
+          rgba(255,255,255,0.02) 2px,
           transparent 3px,
           transparent 7px
         ),
@@ -68,21 +68,20 @@
     }
 
     .logo {
-      display: inline-block;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 28px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: 1.2px;
-      text-shadow: 0 0 10px rgba(255,255,255,0.18), 0 0 20px rgba(240,201,75,0.18);
-      transition: transform 0.25s ease, text-shadow 0.25s ease;
-      white-space: nowrap;
+      width: 92px;
+      height: auto;
+      display: block;
+      filter:
+        drop-shadow(0 0 8px rgba(255,255,255,0.15))
+        drop-shadow(0 0 18px rgba(240,201,75,0.10));
+      transition: transform 0.25s ease, filter 0.25s ease;
     }
 
     .logo:hover {
       transform: translateY(-1px) scale(1.01);
-      text-shadow: 0 0 12px rgba(255,255,255,0.25), 0 0 24px rgba(240,201,75,0.28);
+      filter:
+        drop-shadow(0 0 10px rgba(255,255,255,0.18))
+        drop-shadow(0 0 22px rgba(240,201,75,0.22));
     }
 
     .mini-brand {
@@ -265,7 +264,7 @@
       }
 
       .logo {
-        font-size: 22px;
+        width: 74px;
       }
 
       .mini-brand strong {
@@ -339,7 +338,7 @@
 
       <div class="topbar">
         <div class="brand-left">
-          <div class="logo" aria-label="THE RK STUDIO logo">THE RK STUDIO</div>
+          <img src="images/rk-logo.png" alt="THE RK STUDIO logo" class="logo" />
           <div class="mini-brand">
             <strong>THE RK STUDIO</strong>
             <span id="miniBrandText">Songwriting • Production • AI Assisted</span>
@@ -353,7 +352,7 @@
       </div>
 
       <div class="hero-image">
-        <img id="heroImage" src="images/rk-header.png" alt="THE RK STUDIO header" loading="eager" />
+        <img src="images/rk-header.png" alt="THE RK STUDIO header" />
       </div>
 
       <div class="content">
@@ -422,13 +421,6 @@
         footerNote: "Mer musikk og studionyheter kommer snart"
       }
     };
-
-
-    const fallbackHero = "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1600&q=80";
-    const heroImage = document.getElementById("heroImage");
-    heroImage.addEventListener("error", () => {
-      heroImage.src = fallbackHero;
-    });
 
     function setLanguage(lang) {
       document.documentElement.lang = lang;
