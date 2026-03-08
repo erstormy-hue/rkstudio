@@ -21,7 +21,6 @@
 
     body {
       min-height: 100vh;
-      animation: vinylspin 120s linear infinite;
       background:
         radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 18%),
         repeating-radial-gradient(
@@ -294,7 +293,7 @@
       }
     }
 
-    html
+    @media (max-width: 560px) {
       .page {
         padding: 12px;
       }
@@ -331,17 +330,6 @@
         text-align: center;
       }
     }
-    @keyframes vinylspin {
-
-  from {
-    background-position: center center;
-  }
-
-  to {
-    background-position: center 2000px;
-  }
-
-}
   </style>
 </head>
 <body>
@@ -455,5 +443,3 @@
   </script>
 </body>
 </html>
-
-
