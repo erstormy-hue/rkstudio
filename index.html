@@ -438,7 +438,34 @@ RK Studio can also create personalized songs for special occasions such as birth
         musicBtn: "Spotify / Music",
         contactBtn: "Contact RK Studio",
         aboutTitle: "About RK Studio",
-        aboutText: "RK Studio is a creative songwriting and production space built around strong ideas, modern tools and a simple goal: turn rough inspiration into tracks with character. From lyric concepts and demos to AI-assisted musical direction, the studio is meant to be a flexible home for songs that need atmosphere, edge and identity.",
+        aboutText: `
+          <p>
+            RK Studio is a creative space for songwriting and music production built around ideas, modern tools and one simple goal: turning raw inspiration into songs with character.
+          </p>
+          <p>
+            The studio works at the intersection of traditional songwriting and AI-assisted production. A simple idea, lyric, demo or voice recording can be developed into a complete song with a clear atmosphere and musical direction.
+          </p>
+          <p><strong>RK Studio can help with:</strong></p>
+          <ul>
+            <li>Developing lyric ideas into complete songs</li>
+            <li>Expanding demos or simple recordings</li>
+            <li>Generating new musical directions and arrangements</li>
+            <li>Refining or rewriting existing lyrics</li>
+            <li>Creatively restructuring existing songs</li>
+          </ul>
+          <p>
+            Instruments can also be recorded and added manually, such as guitar or bass, to give the track a more organic musical feel.
+          </p>
+          <p>
+            AI-generated vocals are often used as demo vocals to demonstrate melody, structure and overall mood. These vocals serve as a reference and can later be replaced by a singer or artist.
+          </p>
+          <p>
+            Projects can also be delivered as stems (separate audio tracks), allowing the song to be mixed or further produced in another studio.
+          </p>
+          <p>
+            RK Studio can also create personalized songs for special occasions such as birthdays, weddings or anniversaries, based on a story, a few keywords or a simple idea.
+          </p>
+        `,
         contactLabel: "Contact:",
         footerNote: "More music and studio updates coming soon"
       },
@@ -450,7 +477,34 @@ RK Studio can also create personalized songs for special occasions such as birth
         musicBtn: "Spotify / Musikk",
         contactBtn: "Kontakt RK Studio",
         aboutTitle: "Om RK Studio",
-        aboutText: "RK Studio er et kreativt rom for låtskriving og produksjon bygget rundt sterke ideer, moderne verktøy og et enkelt mål: å gjøre rå inspirasjon om til låter med karakter. Fra tekstidéer og demoer til AI-assistert musikalsk retning er studioet laget som et fleksibelt hjem for sanger som trenger atmosfære, nerve og identitet.",
+        aboutText: `
+          <p>
+            RK Studio er et kreativt rom for låtskriving og musikkproduksjon bygget rundt idéer, moderne verktøy og ett enkelt mål: å gjøre rå inspirasjon om til låter med karakter.
+          </p>
+          <p>
+            Studioet jobber i skjæringspunktet mellom tradisjonell låtskriving og AI-assistert produksjon. En enkel idé, tekst, demo eller stemmeopptak kan utvikles til en komplett låt med tydelig stemning og musikalsk retning.
+          </p>
+          <p><strong>RK Studio kan hjelpe med:</strong></p>
+          <ul>
+            <li>Utvikling av tekstidéer til komplette låter</li>
+            <li>Videreutvikling av demoer eller enkle opptak</li>
+            <li>Skape nye musikalske retninger og arrangementer</li>
+            <li>Forbedring eller omskriving av eksisterende tekster</li>
+            <li>Kreativ omstrukturering av eksisterende låter</li>
+          </ul>
+          <p>
+            Instrumenter kan også spilles inn og legges til manuelt, som gitar eller bass, for å gi låten et mer organisk musikalsk uttrykk.
+          </p>
+          <p>
+            AI-generert vokal brukes ofte som demovokal for å vise melodi, struktur og helhetsfølelse. Denne vokalen fungerer som referanse og kan senere erstattes av en sanger eller artist.
+          </p>
+          <p>
+            Prosjekter kan også leveres som stems (separate lydspor), slik at låten kan mikses eller videreproduseres i et annet studio.
+          </p>
+          <p>
+            RK Studio kan også lage personlige låter for spesielle anledninger som bursdag, bryllup eller jubileum, basert på en historie, noen nøkkelord eller en enkel idé.
+          </p>
+        `,
         contactLabel: "Kontakt:",
         footerNote: "Mer musikk og studionyheter kommer snart"
       }
@@ -465,7 +519,7 @@ RK Studio can also create personalized songs for special occasions such as birth
       document.getElementById("musicBtn").textContent = content[lang].musicBtn;
       document.getElementById("contactBtn").textContent = content[lang].contactBtn;
       document.getElementById("aboutTitle").textContent = content[lang].aboutTitle;
-      document.getElementById("aboutText").textContent = content[lang].aboutText;
+      document.getElementById("aboutText").innerHTML = content[lang].aboutText;
       document.getElementById("contactLabel").textContent = content[lang].contactLabel;
       document.getElementById("footerNote").textContent = content[lang].footerNote;
 
