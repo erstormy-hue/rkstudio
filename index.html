@@ -813,98 +813,84 @@ body{
       .wave.playing{ animation: none; }
       .lift, .chev, aside.sidebar{ transition: none; }
     }
-    /* iPad */
-/* iPad og mindre: skjul gitar */
-@media (max-width:1100px){
-  .bg-guitar{
-    display:none;
-  }
-}
-   @media (max-width:700px){
+    /* iPad og mindre: skjul gitar */
+    @media (max-width: 1100px){
+      .bg-guitar{ display:none; }
+    }
 
- @media (max-width:700px){
+    /* Telefon: app-lignende, ryddig én-kolonne */
+    @media (max-width: 700px){
+      main.main{
+        padding: 14px;
+        padding-top: 72px;
+      }
 
-  .menu-btn{
-    top: 16px;
-    left: 14px;
-    z-index: 80;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border-radius: 14px;
-    display: inline-grid;
-    place-items: center;
-    font-size: 20px;
-    line-height: 1;
-  }
+      .menu-btn{
+        top: 14px;
+        left: 12px;
+        z-index: 80;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border-radius: 14px;
+        display: inline-grid;
+        place-items: center;
+        font-size: 20px;
+        line-height: 1;
+      }
+      .menu-btn .lang{ display: none !important; }
 
-  .menu-btn .lang{
-    display: none !important;
-  }
+      header.hero{ padding: 16px; }
+      .hero-top{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+      .hero-left{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .mark{ width: 48px; height: 48px; }
+      .hero h1{
+        font-size: clamp(34px, 11vw, 44px);
+        line-height: .96;
+      }
+      .hero p{ font-size: 15px; }
 
-  header.hero{
-    padding-top: 28px;
-  }
+      .hero-actions{ width: 100%; }
+      .hero-actions .btn{
+        flex: 1 1 100%;
+        justify-content: center;
+      }
 
-  .hero-top{
-    gap: 18px;
-  }
+      .hero-controls{
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+      }
 
-  .hero-left{
-    gap: 18px;
-  }
+      .segmented button{ min-width: 42px; padding: 10px; }
+      .icon-btn{ width: 42px; height: 42px; }
 
-  .hero h1{
-    font-size: 48px;
-    line-height: .95;
-  }
+      .section{ margin: 14px 0; }
+      .section h2{ font-size: 20px; }
+      .genre-nav{
+        grid-template-columns: 1fr;
+      }
+      .genre-chip{
+        min-height: 52px;
+        text-align: left;
+      }
 
-  .hero-controls{
-    gap: 8px;
-  }
+      .now{
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        width: auto;
+      }
+    }
 
-  .segmented button{
-    min-width: 42px;
-    padding: 10px 10px;
-  }
-
-  .icon-btn{
-    width: 42px;
-    height: 42px;
-  }
-}
-
-  header.hero{
-    padding-top: 28px;
-  }
-
-  .hero-top{
-    gap: 18px;
-  }
-
-  .hero-left{
-    gap: 18px;
-  }
-
-  .hero h1{
-    font-size: 52px;
-    line-height: .95;
-  }
-
-  .hero-controls{
-    gap: 8px;
-  }
-
-  .segmented button{
-    min-width: 42px;
-    padding: 10px 10px;
-  }
-
-  .icon-btn{
-    width: 42px;
-    height: 42px;
-  }
-} 
   </style>
 </head>
 
