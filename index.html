@@ -513,6 +513,7 @@ body{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--gap);
+      align-items: start;
     }
 
     /* Genre cards */
@@ -1672,11 +1673,21 @@ body{
       chips.forEach(b => b.setAttribute("aria-current", b.dataset.genreId === id ? "true" : "false"));
     }
 
-    function openGenre(id, opts = {scroll:false, fromSidebar:false}){
-      // Close others
-      DATA.genres.forEach(g => {
-        if (g.id !== id) closeGenre(g.id, {silent:true});
+    function collapseAllGenres(exceptId = null){
+      const cards = genreGrid.querySelectorAll(".genre-card");
+      cards.forEach((card) => {
+        if (exceptId && card.id === `genre-${exceptId}`) return;
+        const head = card.querySelector(".genre-head");
+        const panel = card.querySelector(".genre-panel");
+        if (!head || !panel) return;
+        head.setAttribute("aria-expanded","false");
+        panel.hidden = true;
       });
+    }
+
+    function openGenre(id, opts = {scroll:false, fromSidebar:false}){
+      // Always keep accordion behavior: open one, close the rest
+      collapseAllGenres(id);
 
       const card = document.getElementById(`genre-${id}`);
       if (!card) return;
@@ -2049,7 +2060,6 @@ body{
       applyDailyGenreRotations(3);
       render();
       setLanguage(lang);
-      openGenre("film", {scroll:false, fromSidebar:false});
     }
 
     initApp();
