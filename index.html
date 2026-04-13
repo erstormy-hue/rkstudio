@@ -1328,7 +1328,7 @@ body{
 
     const DAILY_ROTATING_GENRES = new Set(["film", "podcast", "pop", "rnb", "edm", "ambient", "country", "alternative", "jazzy"]);
     const GITHUB_REPO_OWNER = "erstormy-hue";
-    const GITHUB_REPO_NAME = "testindex";
+    const GITHUB_REPO_NAME = "rkstudio";
     const GENRE_AUDIO_FOLDERS = {
       film: "film-music",
       podcast: "podcast-intro",
@@ -1383,7 +1383,8 @@ body{
 
         try {
           const fetchedTracks = await fetchGenreTracksFromGitHub(genre.id);
-          if (fetchedTracks.length > 0) {
+          const hasRealTrackNames = fetchedTracks.some((track) => !/^fake(?:\b|[-_\s\d])/i.test(track.title || ""));
+          if (fetchedTracks.length > 0 && hasRealTrackNames) {
             genre.tracks = fetchedTracks;
           }
         } catch (err) {
