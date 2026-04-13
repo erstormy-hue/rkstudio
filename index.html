@@ -894,7 +894,7 @@ body{
   </style>
 </head>
 
-<body>
+<body data-lang="en">
   <img src="images/gretch-guitar.png" class="bg-guitar" alt="">
   <a class="skip-link" href="#main"><span class="lang nb">Hopp til innhold</span><span class="lang en">Skip to content</span></a>
 
@@ -995,8 +995,8 @@ body{
               data-aria-en="Language"
               id="langGroup"
             >
-              <button id="langNb" type="button" aria-pressed="true">NO</button>
-              <button id="langEn" type="button" aria-pressed="false">EN</button>
+              <button id="langNb" type="button" aria-pressed="false">NO</button>
+              <button id="langEn" type="button" aria-pressed="true">EN</button>
             </div>
 
             <button id="aboutBtn" class="icon-btn" type="button"
@@ -1429,7 +1429,7 @@ body{
 
     // State
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let lang = localStorage.getItem("rk_lang") || "nb";
+    let lang = localStorage.getItem("rk_lang") || "en";
 
     let openGenreId = null;
     let activeTrackId = null;
