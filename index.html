@@ -128,7 +128,7 @@ body{
     .glass{
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
       border: 1px solid var(--stroke);
-      border-radius: 14px;
+      border-radius: 12px;
       box-shadow: var(--shadow2);
     }
     @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
@@ -161,8 +161,8 @@ body{
       top: 14px;
       left: 14px;
       z-index: 70;
-      padding: 10px 12px;
-      border-radius: 14px;
+      padding: 20px 24px;
+      border-radius: 12px;
       border:1px solid var(--stroke);
       background:rgba(255,255,255,.06);
       color: var(--ink);
@@ -185,6 +185,10 @@ body{
     main.main{
       padding: 18px;
       padding-left: calc(var(--sidebar-w) + 18px + 18px);
+      margin: 0;
+    }
+
+    .content-wrap{
       max-width: 1240px;
       margin: 0 auto;
     }
@@ -208,7 +212,7 @@ body{
     }
     .brand-badge{
       width:44px;height:44px;
-      border-radius: 14px;
+      border-radius: 12px;
       display:grid;
       place-items:center;
       font-weight: 900;
@@ -247,7 +251,7 @@ body{
     .nav .nav-btn{
       flex: 1;
       min-width: 120px;
-      padding: 10px 12px;
+      padding: 20px 24px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
@@ -273,7 +277,7 @@ body{
       align-items:center;
       justify-content:space-between;
       gap: 10px;
-      padding: 10px 12px;
+      padding: 20px 24px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
@@ -309,15 +313,15 @@ body{
 
     /* Hero */
     header.hero{
-      padding: 10px 12px;
+      padding: 20px 24px;
       margin: 0 0 18px;
       position: relative;
       overflow:hidden;
-      min-height: 490px;
+      min-height: 500px;
       display:flex;
       align-items:flex-start;
-      border-radius: 14px;
-      background-color: #071325;
+      border-radius: 12px;
+      background-color: #061224;
       background-image:
         linear-gradient(110deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.68) 55%, rgba(0,0,0,.82) 100%),
         url('./images/rkstudio-hero-bg.png');
@@ -399,7 +403,7 @@ body{
       border:0;
       background: transparent;
       color: var(--ink);
-      padding: 10px 12px;
+      padding: 20px 24px;
       cursor:pointer;
       font-weight: 850;
       letter-spacing: .06em;
@@ -446,7 +450,7 @@ body{
       display:inline-flex;
       align-items:center;
       gap: 8px;
-      padding: 10px 12px;
+      padding: 20px 24px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
       text-decoration:none;
@@ -555,7 +559,7 @@ body{
       align-items:center;
       gap: 12px;
       padding: 8px 10px;
-      border-radius: 14px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
       color: var(--ink);
@@ -669,7 +673,7 @@ body{
     }
     .mini-btn{
       padding: 8px 10px;
-      border-radius: 14px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       color: var(--ink);
@@ -714,8 +718,8 @@ body{
       left: 50%;
       top: 18px;
       transform: translateX(-50%);
-      padding: 10px 12px;
-      border-radius: 14px;
+      padding: 20px 24px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.55);
       color: rgba(233,238,252,.92);
@@ -779,6 +783,31 @@ body{
       .now{ right: 14px; bottom: 14px; }
     }
 
+
+    @media (min-width: 1400px){
+      main.main{
+        padding-right: 28px;
+      }
+
+      header.hero{
+        min-height: 520px;
+        background-position: 72% center;
+      }
+
+      .hero-top{
+        width: min(980px, 62vw);
+      }
+
+      .hero h1{
+        font-size: clamp(44px, 3.2vw, 64px);
+      }
+
+      .hero p{
+        max-width: 68ch;
+        font-size: 18px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce){
       body::before{ animation: none; }
       .wave.playing{ animation: none; }
@@ -803,7 +832,7 @@ body{
         width: 44px;
         height: 44px;
         padding: 0;
-        border-radius: 14px;
+        border-radius: 12px;
         display: inline-grid;
         place-items: center;
         font-size: 20px;
@@ -811,7 +840,7 @@ body{
       }
       .menu-btn .lang{ display: none !important; }
 
-      header.hero{ padding: 12px; min-height: 440px; background-position: 68% center; }
+      header.hero{ padding: 16px; min-height: 460px; background-position: 70% center; }
       .hero-top{
         flex-direction: column;
         align-items: stretch;
@@ -923,7 +952,7 @@ body{
     </aside>
 
     <main id="main" class="main" tabindex="-1">
-      <header class="hero glass lift">
+      <header class="hero">
         <div class="hero-top">
           <div class="hero-left">
             <div class="hero-title">
@@ -984,6 +1013,7 @@ body{
         </div>
       </header>
 
+      <div class="content-wrap">
       <section class="section">
         <h2><span class="lang nb">Stiler og smakebiter</span><span class="lang en">Styles & previews</span></h2>
 
@@ -1039,6 +1069,7 @@ body{
           Previews are for listening and evaluation only. No downloading or reuse without agreement.
         </p>
       </section>
+      </div>
     </main>
 
     <!-- ABOUT MODAL -->
