@@ -324,7 +324,7 @@ body{
       background-color: #061224;
       background-image:
         linear-gradient(110deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.68) 55%, rgba(0,0,0,.82) 100%),
-        url('./images/rkstudio-hero-bg.png');
+        url('./images/rkstudio-hero-bg.jpg');
       background-size: cover;
       background-position: center right;
       background-repeat: no-repeat;
@@ -383,6 +383,21 @@ body{
       max-width: 78ch;
       line-height: 1.55;
     }
+
+
+    .hero-nav{display:flex; gap:18px; align-items:center; justify-content:flex-end; margin-bottom:18px; flex-wrap:wrap;}
+    .hero-link{background:transparent; border:0; color:var(--ink); font-weight:700; cursor:pointer; text-decoration:none;}
+    .hero-lang{margin-left:auto; border-color:rgba(255,255,255,.25);}
+    .hero-kicker{margin:0 0 8px; color:#8f7bff; font-size:clamp(18px,2vw,34px);}
+    .hero-cards{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; width:100%; margin-top:12px;}
+    .offer-card{padding:20px; border-radius:20px; background:rgba(8,10,24,.58); border:1px solid rgba(255,255,255,.18); box-shadow:0 0 28px rgba(0,0,0,.35);}
+    .offer-card h3{margin:0 0 10px; font-size:42px;}
+    .offer-card p{margin:0 0 10px; font-size:18px;}
+    .offer-card ul{margin:0 0 16px; padding-left:18px; line-height:1.6;}
+    .offer-card.artist{border-color:rgba(143,123,255,.75);}
+    .offer-card.order{border-color:rgba(242,201,76,.75);}
+    .btn.primary.purple{background:linear-gradient(180deg,#8f63ff,#6c46d8); color:#fff; border-color:#8f63ff;}
+    .btn.primary.amber{background:linear-gradient(180deg,#f2c94c,#d99d16); color:#111; border-color:#f2c94c;}
 
     /* Top-right controls */
     .hero-controls{
@@ -862,6 +877,10 @@ body{
         flex: 1 1 100%;
         justify-content: center;
       }
+      .hero-cards{ grid-template-columns: 1fr; }
+      .offer-card h3{ font-size: 32px; }
+      .hero-nav{ justify-content:flex-start; gap:12px; }
+      .hero-lang{ margin-left:0; }
 
       .hero-controls{
         width: 100%;
@@ -893,7 +912,7 @@ body{
   </style>
 </head>
 
-<body data-lang="en">
+<body data-lang="nb">
   <img src="images/gretch-guitar.png" class="bg-guitar" alt="">
   <a class="skip-link" href="#main"><span class="lang nb">Hopp til innhold</span><span class="lang en">Skip to content</span></a>
 
@@ -945,6 +964,8 @@ body{
         <div id="genreNav" class="genre-nav" role="list"></div>
       </div>
 
+      <a class="btn primary" href="https://open.spotify.com/album/1KUctHx3iPXNGyUuQNXf8E" target="_blank" rel="noopener noreferrer" style="justify-content:center; font-weight:900;">▶ RK Album</a>
+
       <div class="sidebar-footer">
         <div><span class="lang nb">Prototype / demo</span><span class="lang en">Prototype / demo</span></div>
         <div style="margin-top:6px;">© <span id="year"></span> RK Studio</div>
@@ -953,68 +974,58 @@ body{
 
     <main id="main" class="main" tabindex="-1">
       <header class="hero">
+        <div class="hero-nav">
+          <button class="hero-link" type="button" data-action="scrollToDemos"><span class="lang nb">Demos</span><span class="lang en">Demos</span></button>
+          <button class="hero-link" type="button" data-action="scrollToArtists"><span class="lang nb">For artister</span><span class="lang en">For artists</span></button>
+          <button class="hero-link" type="button" data-action="scrollToOrder"><span class="lang nb">Bestill låt</span><span class="lang en">Order song</span></button>
+          <button id="aboutBtn" class="hero-link" type="button"><span class="lang nb">Om RK Studio</span><span class="lang en">About RK Studio</span></button>
+          <a class="hero-link" href="mailto:post@rkstudio.no"><span class="lang nb">Kontakt</span><span class="lang en">Contact</span></a>
+          <div class="segmented hero-lang" role="group" id="langGroup">
+            <button id="langNb" type="button" aria-pressed="true">🇳🇴 NO</button>
+            <button id="langEn" type="button" aria-pressed="false">🇬🇧 EN</button>
+          </div>
+        </div>
+
         <div class="hero-top">
           <div class="hero-left">
             <div class="hero-title">
-              <p class="hero-kicker">RK STUDIO</p>
-              <h1>FERDIGE LÅTIDÉER.<br/>KLARE FOR DEG.</h1>
-
-              <p class="lang nb">
-                Korte, roterende teasere i flere sjangere. Hører du noe som treffer?
-                La oss utvikle det videre.
-              </p>
-              <p class="lang en">
-                Short rotating teasers across multiple genres. Hear something that clicks?
-                Let us develop it further.
-              </p>
-
-              <div class="hero-pills">
-                <span class="hero-pill">30 SEK TEASERE</span>
-                <span class="hero-pill">NYE IDÉER HVER DAG</span>
-                <span class="hero-pill">LYTT – BLI INSPIRERT – SKAP</span>
-              </div>
-
-              <div class="hero-actions">
-                <a class="btn primary" href="https://open.spotify.com/album/1KUctHx3iPXNGyUuQNXf8E" target="_blank" rel="noopener noreferrer"
-                  data-aria-nb="Åpne RK Album på Spotify"
-                  data-aria-en="Open RK Album on Spotify"
-                >
-                  ▶ <span class="lang nb">RK Album</span><span class="lang en">RK Album</span>
-                </a>
-
-                <a class="btn" href="mailto:studio@rkstudio.no"
-                  data-aria-nb="Send e-post til RK Studio"
-                  data-aria-en="Send email to RK Studio"
-                >
-                  ✉ <span class="lang nb">Kontakt</span><span class="lang en">Contact</span>
-                </a>
-              </div>
+              <h2 class="hero-kicker"><span class="lang nb">IDÉLEVERANDØR FOR MODERNE MUSIKK</span><span class="lang en">IDEA SUPPLIER FOR MODERN MUSIC</span></h2>
+              <h1><span class="lang nb">AI-assisterte demoer<br/>og skreddersydde låter</span><span class="lang en">AI-assisted demos<br/>and custom songs</span></h1>
+              <p class="lang nb">Mastering og opp lyd er kun for å gi best mulig lydbilde. Idéleveransen kan utvikles videre i ditt eget studio med analoge instrumenter og vokal.</p>
+              <p class="lang en">Mastering and loudness are only used to present the best possible sound image. The idea can be developed further in your own studio with real vocals and analogue instruments.</p>
             </div>
           </div>
 
-          <div class="hero-controls">
-            <div class="segmented" role="group"
-              data-aria-nb="Språkvalg"
-              data-aria-en="Language"
-              id="langGroup"
-            >
-              <button id="langNb" type="button" aria-pressed="false">NO</button>
-              <button id="langEn" type="button" aria-pressed="true">EN</button>
-            </div>
+          <div class="hero-cards">
+            <article id="forArtists" class="offer-card artist">
+              <h3><span class="lang nb">FOR ARTISTER</span><span class="lang en">FOR ARTISTS</span></h3>
+              <p><span class="lang nb">Finn idéer, hooks og retning<br/>AI-assisterte demoer klare til å videreutvikles i ditt studio.</span><span class="lang en">Find ideas, hooks and direction<br/>AI-assisted demos ready to be developed further in your studio.</span></p>
+              <ul>
+                <li><span class="lang nb">30 sek teasere i ulike sjangre</span><span class="lang en">30 sec teasers in different genres</span></li>
+                <li><span class="lang nb">Hooks, melodier og vibe</span><span class="lang en">Hooks, melodies and vibe</span></li>
+                <li><span class="lang nb">Perfekt som startpunkt</span><span class="lang en">Perfect starting point</span></li>
+                <li><span class="lang nb">Utvikle med eget band, vokal og instrumenter</span><span class="lang en">Develop with your own band, vocals and instruments</span></li>
+              </ul>
+              <button class="btn primary purple" type="button" data-action="scrollToDemos">EXPLORE DEMOS</button>
+            </article>
 
-            <button id="aboutBtn" class="icon-btn" type="button"
-              data-aria-nb="Åpne Om RK Studio"
-              data-aria-en="Open About RK Studio"
-              title="About"
-            >
-              i
-            </button>
+            <article id="forOrder" class="offer-card order">
+              <h3><span class="lang nb">FOR DEG SOM VIL HA EN FERDIG LÅT</span><span class="lang en">FOR PERSONAL SONGS</span></h3>
+              <p><span class="lang nb">Personlige sanger til bryllup, bursdag, jubileum eller andre spesielle øyeblikk.</span><span class="lang en">Personal songs for weddings, birthdays, anniversaries or other special moments.</span></p>
+              <ul>
+                <li><span class="lang nb">Du forteller historien</span><span class="lang en">You tell the story</span></li>
+                <li><span class="lang nb">Jeg lager tekst, melodi og vokal</span><span class="lang en">I create lyrics, melody and vocals</span></li>
+                <li><span class="lang nb">Din sang – ferdig produsert</span><span class="lang en">Your song – fully produced</span></li>
+                <li><span class="lang nb">Alle sjangre, tilpasset deg</span><span class="lang en">Any genre, tailored to you</span></li>
+              </ul>
+              <a class="btn primary amber" href="mailto:post@rkstudio.no">BESTILL DIN LÅT</a>
+            </article>
           </div>
         </div>
       </header>
 
       <div class="content-wrap">
-      <section class="section">
+      <section id="demos" class="section">
         <h2><span class="lang nb">Stiler og smakebiter</span><span class="lang en">Styles & previews</span></h2>
 
         <p class="lang nb">
@@ -1429,6 +1440,9 @@ body{
     const nowTitle = document.getElementById("nowTitle");
     const nowToggle = document.getElementById("nowToggle");
     const nowStop = document.getElementById("nowStop");
+    const scrollToDemos = () => document.getElementById("demos")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"});
+    const scrollToArtists = () => document.getElementById("forArtists")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
+    const scrollToOrder = () => document.getElementById("forOrder")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
     const nowFill = document.getElementById("nowFill");
     const nowTime = document.getElementById("nowTime");
     const nowDur = document.getElementById("nowDur");
