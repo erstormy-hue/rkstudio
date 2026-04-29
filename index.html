@@ -313,16 +313,14 @@ body{
       margin: 0 0 18px;
       position: relative;
       overflow:hidden;
-      min-height: 470px;
+      min-height: 460px;
       display:flex;
       align-items:flex-start;
-      border-radius: 26px;
-      border: 1px solid rgba(121,184,255,.32);
-      box-shadow: var(--shadow);
+      border-radius: var(--r-xl);
       background-color: #071325;
       background-image:
-        linear-gradient(110deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.78) 100%),
-        url('./images/hero-rkstudio.png');
+        linear-gradient(110deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.6) 55%, rgba(0,0,0,.8) 100%),
+        url('./images/rkstudio-hero-bg.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -334,8 +332,8 @@ body{
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(760px 260px at 20% 15%, rgba(121,184,255,.20), transparent 65%),
-        radial-gradient(520px 280px at 82% 12%, rgba(242,201,76,.12), transparent 70%);
+        radial-gradient(760px 260px at 20% 15%, rgba(121,184,255,.18), transparent 65%),
+        radial-gradient(520px 280px at 82% 12%, rgba(242,201,76,.10), transparent 70%);
       pointer-events:none;
       z-index: 0;
     }
@@ -344,27 +342,13 @@ body{
       display:flex;
       flex-direction:column;
       align-items:flex-start;
-      gap: 18px;
+      gap: 16px;
       position: relative;
       width: min(760px, 100%);
       z-index: 1;
-      padding: 8px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(8,28,56,.50), rgba(4,14,28,.35));
-      border: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(2px);
     }
 
     .hero-left{ min-width: 0; }
-
-    .hero-kicker{
-      margin: 0;
-      font-size: 14px;
-      letter-spacing: .45em;
-      color: rgba(242,201,76,.9);
-      text-transform: uppercase;
-      font-weight: 700;
-    }
 .bg-guitar{
   position: fixed;
   left: 340px;
@@ -455,22 +439,6 @@ body{
       position: relative;
     }
 
-    .hero-pills{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .hero-pill{
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(7,20,38,.55);
-      color: rgba(233,238,252,.9);
-      font-size: 12px;
-      letter-spacing: .05em;
-      font-weight: 700;
-    }
     .btn{
       display:inline-flex;
       align-items:center;
@@ -840,7 +808,7 @@ body{
       }
       .menu-btn .lang{ display: none !important; }
 
-      header.hero{ padding: 18px; min-height: 420px; background-position: 62% center; }
+      header.hero{ padding: 16px; min-height: 420px; background-position: 60% center; }
       .hero-top{
         flex-direction: column;
         align-items: stretch;
