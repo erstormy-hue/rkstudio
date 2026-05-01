@@ -323,10 +323,10 @@ body{
       border-radius: 12px;
       background-color: #061224;
       background-image:
-        linear-gradient(110deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.68) 55%, rgba(0,0,0,.82) 100%),
-        url('./images/rkstudio-hero-bg.jpg');
+        linear-gradient(110deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.68) 52%, rgba(0,0,0,.84) 100%),
+        url('./images/rk-studio-topp-bg.png');
       background-size: cover;
-      background-position: center right;
+      background-position: center;
       background-repeat: no-repeat;
       isolation: isolate;
     }
@@ -348,7 +348,8 @@ body{
       align-items:flex-start;
       gap: 14px;
       position: relative;
-      width: min(780px, 100%);
+      width: min(1280px, 100%);
+      margin-right: auto;
       z-index: 1;
     }
 
@@ -385,17 +386,22 @@ body{
     }
 
 
-    .hero-nav{display:flex; gap:18px; align-items:center; justify-content:flex-end; margin-bottom:18px; flex-wrap:wrap;}
+    .hero-nav{display:flex; gap:18px; align-items:center; justify-content:flex-start; margin-bottom:18px; flex-wrap:wrap; width:min(1180px,100%);}
     .hero-link{background:transparent; border:0; color:var(--ink); font-weight:700; cursor:pointer; text-decoration:none;}
     .hero-lang{margin-left:auto; border-color:rgba(255,255,255,.25);}
     .hero-kicker{margin:0 0 8px; color:#8f7bff; font-size:clamp(18px,2vw,34px);}
-    .hero-cards{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; width:100%; margin-top:12px;}
-    .offer-card{padding:20px; border-radius:20px; background:rgba(8,10,24,.58); border:1px solid rgba(255,255,255,.18); box-shadow:0 0 28px rgba(0,0,0,.35);}
-    .offer-card h3{margin:0 0 10px; font-size:42px;}
+    .hero-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; width:min(1180px,100%); margin-top:12px;}
+    .offer-card{position:relative; padding:24px; border-radius:24px; border:1px solid rgba(255,255,255,.18); box-shadow:0 0 28px rgba(0,0,0,.35); overflow:hidden; isolation:isolate;}
+    .offer-card::before{content:""; position:absolute; inset:0; background-size:cover; background-position:center; z-index:-3;}
+    .offer-card::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(0,0,0,.86), rgba(0,0,0,.52) 56%, rgba(0,0,0,.82)); z-index:-2;}
+    .offer-card h3{margin:0 0 10px; font-size:clamp(38px,2.8vw,52px); line-height:1.02;}
     .offer-card p{margin:0 0 10px; font-size:18px;}
     .offer-card ul{margin:0 0 16px; padding-left:18px; line-height:1.6;}
-    .offer-card.artist{border-color:rgba(143,123,255,.75);}
-    .offer-card.order{border-color:rgba(242,201,76,.75);}
+    .offer-card.artist{border-color:rgba(143,123,255,.85); box-shadow:0 0 0 1px rgba(143,123,255,.28), 0 0 34px rgba(143,123,255,.25);}
+    .offer-card.artist::before{background-image:url('./images/rk-studio-card1-bg.png');}
+    .offer-card.order{border-color:rgba(242,201,76,.85); box-shadow:0 0 0 1px rgba(242,201,76,.3), 0 0 34px rgba(242,201,76,.2);}
+    .offer-card.order::before{background-image:url('./images/rk-studio-card2-bg.png');}
+    .offer-icon{width:56px; height:56px; object-fit:contain; margin-bottom:14px;}
     .btn.primary.purple{background:linear-gradient(180deg,#8f63ff,#6c46d8); color:#fff; border-color:#8f63ff;}
     .btn.primary.amber{background:linear-gradient(180deg,#f2c94c,#d99d16); color:#111; border-color:#f2c94c;}
 
@@ -809,9 +815,7 @@ body{
         background-position: 72% center;
       }
 
-      .hero-top{
-        width: min(980px, 62vw);
-      }
+      .hero-top{ width: min(1360px, 100%); }
 
       .hero h1{
         font-size: clamp(44px, 3.2vw, 64px);
@@ -855,7 +859,7 @@ body{
       }
       .menu-btn .lang{ display: none !important; }
 
-      header.hero{ padding: 16px; min-height: 460px; background-position: 70% center; }
+      header.hero{ padding: 16px; min-height: 460px; background-position: 62% center; }
       .hero-top{
         flex-direction: column;
         align-items: stretch;
@@ -991,13 +995,14 @@ body{
             <div class="hero-title">
               <h2 class="hero-kicker"><span class="lang nb">IDÉLEVERANDØR FOR MODERNE MUSIKK</span><span class="lang en">IDEA SUPPLIER FOR MODERN MUSIC</span></h2>
               <h1><span class="lang nb">AI-assisterte demoer<br/>og skreddersydde låter</span><span class="lang en">AI-assisted demos<br/>and custom songs</span></h1>
-              <p class="lang nb">Mastering og opp lyd er kun for å gi best mulig lydbilde. Idéleveransen kan utvikles videre i ditt eget studio med analoge instrumenter og vokal.</p>
-              <p class="lang en">Mastering and loudness are only used to present the best possible sound image. The idea can be developed further in your own studio with real vocals and analogue instruments.</p>
+              <p class="lang nb">Mastering og opp lyd er kun for å gi best mulig lydbilde.<br/>Idéleveransen kan utvikles videre i ditt eget studio<br/>med analoge instrumenter og vokal.</p>
+              <p class="lang en">Mastering and loudness are only used to present the best possible sound image.<br/>The idea can be developed further in your own studio<br/>with real vocals and analogue instruments.</p>
             </div>
           </div>
 
           <div class="hero-cards">
             <article id="forArtists" class="offer-card artist">
+              <img class="offer-icon" src="./images/rk-studio-card1-ikon.png" alt="" aria-hidden="true"/>
               <h3><span class="lang nb">FOR ARTISTER</span><span class="lang en">FOR ARTISTS</span></h3>
               <p><span class="lang nb">Finn idéer, hooks og retning<br/>AI-assisterte demoer klare til å videreutvikles i ditt studio.</span><span class="lang en">Find ideas, hooks and direction<br/>AI-assisted demos ready to be developed further in your studio.</span></p>
               <ul>
@@ -1010,15 +1015,16 @@ body{
             </article>
 
             <article id="forOrder" class="offer-card order">
-              <h3><span class="lang nb">FOR DEG SOM VIL HA EN FERDIG LÅT</span><span class="lang en">FOR PERSONAL SONGS</span></h3>
-              <p><span class="lang nb">Personlige sanger til bryllup, bursdag, jubileum eller andre spesielle øyeblikk.</span><span class="lang en">Personal songs for weddings, birthdays, anniversaries or other special moments.</span></p>
+              <img class="offer-icon" src="./images/rk-studio-card2-ikon.png" alt="" aria-hidden="true"/>
+              <h3><span class="lang nb">FOR DEG SOM VIL HA<br/>EN FERDIG LÅT</span><span class="lang en">FOR YOU WHO WANT<br/>A FINISHED SONG</span></h3>
+              <p><span class="lang nb">Personlige sanger til bryllup,<br/>bursdag, jubileum eller andre<br/>spesielle øyeblikk.</span><span class="lang en">Personal songs for weddings,<br/>birthdays, anniversaries or other<br/>special moments.</span></p>
               <ul>
                 <li><span class="lang nb">Du forteller historien</span><span class="lang en">You tell the story</span></li>
                 <li><span class="lang nb">Jeg lager tekst, melodi og vokal</span><span class="lang en">I create lyrics, melody and vocals</span></li>
                 <li><span class="lang nb">Din sang – ferdig produsert</span><span class="lang en">Your song – fully produced</span></li>
                 <li><span class="lang nb">Alle sjangre, tilpasset deg</span><span class="lang en">Any genre, tailored to you</span></li>
               </ul>
-              <a class="btn primary amber" href="mailto:post@rkstudio.no">BESTILL DIN LÅT</a>
+              <a class="btn primary amber" href="mailto:post@rkstudio.no"><span class="lang nb">BESTILL DIN LÅT</span><span class="lang en">ORDER YOUR SONG</span></a>
             </article>
           </div>
         </div>
@@ -1449,7 +1455,7 @@ body{
 
     // State
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let lang = localStorage.getItem("rk_lang") || "en";
+    let lang = localStorage.getItem("rk_lang") || "nb";
 
     let openGenreId = null;
     let activeTrackId = null;
