@@ -319,12 +319,13 @@ body{
       overflow:hidden;
       min-height: 500px;
       display:flex;
+      flex-direction:column;
       align-items:flex-start;
       border-radius: 12px;
       background-color: #061224;
       background-image:
         linear-gradient(110deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.68) 52%, rgba(0,0,0,.84) 100%),
-        url('./images/rk-studio-topp-bg.png');
+        url('images/rk-studio-topp-bg.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -348,7 +349,8 @@ body{
       align-items:flex-start;
       gap: 14px;
       position: relative;
-      width: min(1280px, 100%);
+      width: min(1180px, 100%);
+      margin-left: clamp(24px, 4vw, 70px);
       margin-right: auto;
       z-index: 1;
     }
@@ -386,21 +388,21 @@ body{
     }
 
 
-    .hero-nav{display:flex; gap:18px; align-items:center; justify-content:flex-start; margin-bottom:18px; flex-wrap:wrap; width:min(1180px,100%);}
+    .hero-nav{width:100%; display:flex; justify-content:flex-end; align-items:center; gap:18px; margin-bottom:32px;}
     .hero-link{background:transparent; border:0; color:var(--ink); font-weight:700; cursor:pointer; text-decoration:none;}
     .hero-lang{margin-left:auto; border-color:rgba(255,255,255,.25);}
     .hero-kicker{margin:0 0 8px; color:#8f7bff; font-size:clamp(18px,2vw,34px);}
-    .hero-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; width:min(1180px,100%); margin-top:12px;}
-    .offer-card{position:relative; padding:24px; border-radius:24px; border:1px solid rgba(255,255,255,.18); box-shadow:0 0 28px rgba(0,0,0,.35); overflow:hidden; isolation:isolate;}
+    .hero-cards{width:min(980px,100%); display:grid; grid-template-columns:repeat(2,minmax(320px,1fr)); gap:18px; margin-top:12px;}
+    .offer-card{position:relative; min-height:360px; padding:24px; border-radius:24px; border:1px solid rgba(255,255,255,.18); box-shadow:0 0 28px rgba(0,0,0,.35); overflow:hidden; isolation:isolate; background-size:cover; background-position:center;}
     .offer-card::before{content:""; position:absolute; inset:0; background-size:cover; background-position:center; z-index:-3;}
-    .offer-card::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(0,0,0,.86), rgba(0,0,0,.52) 56%, rgba(0,0,0,.82)); z-index:-2;}
+    .offer-card::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.62) 48%, rgba(0,0,0,.30) 100%); z-index:-2;}
     .offer-card h3{margin:0 0 10px; font-size:clamp(38px,2.8vw,52px); line-height:1.02;}
     .offer-card p{margin:0 0 10px; font-size:18px;}
     .offer-card ul{margin:0 0 16px; padding-left:18px; line-height:1.6;}
     .offer-card.artist{border-color:rgba(143,123,255,.85); box-shadow:0 0 0 1px rgba(143,123,255,.28), 0 0 34px rgba(143,123,255,.25);}
-    .offer-card.artist::before{background-image:url('./images/rk-studio-card1-bg.png');}
+    .offer-card.artist::before{background-image:url("images/rk-studio-card1-bg.png");}
     .offer-card.order{border-color:rgba(242,201,76,.85); box-shadow:0 0 0 1px rgba(242,201,76,.3), 0 0 34px rgba(242,201,76,.2);}
-    .offer-card.order::before{background-image:url('./images/rk-studio-card2-bg.png');}
+    .offer-card.order::before{background-image:url("images/rk-studio-card2-bg.png");}
     .offer-icon{width:56px; height:56px; object-fit:contain; margin-bottom:14px;}
     .btn.primary.purple{background:linear-gradient(180deg,#8f63ff,#6c46d8); color:#fff; border-color:#8f63ff;}
     .btn.primary.amber{background:linear-gradient(180deg,#f2c94c,#d99d16); color:#111; border-color:#f2c94c;}
@@ -517,6 +519,7 @@ body{
     .genre-head{
       width:100%;
       display:flex;
+      flex-direction:column;
       align-items:flex-start;
       justify-content:space-between;
       gap: 14px;
@@ -768,6 +771,7 @@ body{
     }
     .modal-head{
       display:flex;
+      flex-direction:column;
       align-items:flex-start;
       justify-content:space-between;
       gap: 12px;
@@ -882,8 +886,9 @@ body{
         justify-content: center;
       }
       .hero-cards{ grid-template-columns: 1fr; }
+      .hero-top{ margin-left: 0; }
       .offer-card h3{ font-size: 32px; }
-      .hero-nav{ justify-content:flex-start; gap:12px; }
+      .hero-nav{ justify-content:flex-start; flex-wrap:wrap; gap:12px; }
       .hero-lang{ margin-left:0; }
 
       .hero-controls{
@@ -1002,7 +1007,7 @@ body{
 
           <div class="hero-cards">
             <article id="forArtists" class="offer-card artist">
-              <img class="offer-icon" src="./images/rk-studio-card1-ikon.png" alt="" aria-hidden="true"/>
+              <img class="offer-icon" src="images/rk-studio-card1-ikon.png" alt="" aria-hidden="true"/>
               <h3><span class="lang nb">FOR ARTISTER</span><span class="lang en">FOR ARTISTS</span></h3>
               <p><span class="lang nb">Finn idéer, hooks og retning<br/>AI-assisterte demoer klare til å videreutvikles i ditt studio.</span><span class="lang en">Find ideas, hooks and direction<br/>AI-assisted demos ready to be developed further in your studio.</span></p>
               <ul>
@@ -1015,7 +1020,7 @@ body{
             </article>
 
             <article id="forOrder" class="offer-card order">
-              <img class="offer-icon" src="./images/rk-studio-card2-ikon.png" alt="" aria-hidden="true"/>
+              <img class="offer-icon" src="images/rk-studio-card2-ikon.png" alt="" aria-hidden="true"/>
               <h3><span class="lang nb">FOR DEG SOM VIL HA<br/>EN FERDIG LÅT</span><span class="lang en">FOR YOU WHO WANT<br/>A FINISHED SONG</span></h3>
               <p><span class="lang nb">Personlige sanger til bryllup,<br/>bursdag, jubileum eller andre<br/>spesielle øyeblikk.</span><span class="lang en">Personal songs for weddings,<br/>birthdays, anniversaries or other<br/>special moments.</span></p>
               <ul>
