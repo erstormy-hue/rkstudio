@@ -494,6 +494,41 @@ body{
     }
     .btn.primary:hover{ filter: brightness(1.03); }
 
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .cta-buttons .btn {
+      flex: 1;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .btn.secondary {
+      opacity: 0.9;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn.secondary:hover {
+      opacity: 1;
+    }
+
+    .teaser-btn {
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .teaser-btn:hover {
+      border: 1px solid rgba(255,200,100,0.6);
+      box-shadow: 0 0 10px rgba(255,200,100,0.3);
+    }
+
+    .play-button.glow {
+      box-shadow: 0 0 12px rgba(255,200,100,0.7),
+                  0 0 25px rgba(255,200,100,0.4);
+    }
+
     /* Section content */
     .section{ margin: 18px 0; }
     .section h2{
@@ -886,6 +921,9 @@ body{
         flex: 1 1 100%;
         justify-content: center;
       }
+      .cta-buttons{
+        flex-direction: column;
+      }
       .hero-cards{ grid-template-columns: 1fr; }
       .hero-top{ margin-left: 0; }
       .offer-card h3{ font-size: 32px; }
@@ -1030,7 +1068,10 @@ body{
                 <li><span class="lang nb">Din sang – ferdig produsert</span><span class="lang en">Your song – fully produced</span></li>
                 <li><span class="lang nb">Alle sjangre, tilpasset deg</span><span class="lang en">Any genre, tailored to you</span></li>
               </ul>
-              <a class="btn primary amber" href="mailto:studio@rkstudio.no"><span class="lang nb">BESTILL DIN LÅT</span><span class="lang en">ORDER YOUR SONG</span></a>
+              <div class="cta-buttons">
+                <a href="/bestill" class="btn primary"><span class="lang nb">BESTILL DIN LÅT</span><span class="lang en">ORDER YOUR SONG</span></a>
+                <a href="#country-americana" class="btn secondary teaser-btn">Teaser</a>
+              </div>
             </article>
           </div>
         </div>
@@ -1452,7 +1493,10 @@ body{
     const nowTitle = document.getElementById("nowTitle");
     const nowToggle = document.getElementById("nowToggle");
     const nowStop = document.getElementById("nowStop");
-    const scrollToDemos = () => document.getElementById("demos")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"});
+    const scrollToDemos = () => {
+      document.getElementById("demos")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"});
+      openGenre("rnb", { scroll: true });
+    };
     const scrollToArtists = () => document.getElementById("forArtists")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
     const scrollToOrder = () => document.getElementById("forOrder")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
     const nowFill = document.getElementById("nowFill");
@@ -1591,7 +1635,7 @@ body{
         // Main card
         const card = document.createElement("section");
         card.className = "genre-card glass lift";
-        card.id = `genre-${g.id}`;
+        card.id = g.id === "country" ? "country-americana" : `genre-${g.id}`;
 
         const headId = `genre-head-${g.id}`;
         const panelId = `genre-panel-${g.id}`;
@@ -1636,7 +1680,7 @@ body{
 
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "track-btn";
+          btn.className = "track-btn play-button";
           btn.dataset.trackId = trackId;
           btn.dataset.src = t.src;
           btn.dataset.title = t.title;
@@ -1720,7 +1764,7 @@ body{
       // Always keep accordion behavior: open one, close the rest
       collapseAllGenres(id);
 
-      const card = document.getElementById(`genre-${id}`);
+      const card = document.getElementById(id === "country" ? "country-americana" : `genre-${id}`);
       if (!card) return;
       const head = card.querySelector(".genre-head");
       const panel = card.querySelector(".genre-panel");
@@ -1741,7 +1785,7 @@ body{
     }
 
     function closeGenre(id, {silent=false} = {}){
-      const card = document.getElementById(`genre-${id}`);
+      const card = document.getElementById(id === "country" ? "country-americana" : `genre-${id}`);
       if (!card) return;
       const head = card.querySelector(".genre-head");
       const panel = card.querySelector(".genre-panel");
@@ -2072,6 +2116,27 @@ body{
       });
     });
 
+    document.querySelectorAll("[data-action='scrollToDemos']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scrollToDemos();
+        if (isMobile()) closeSidebar();
+      });
+    });
+
+    document.querySelectorAll("[data-action='scrollToArtists']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scrollToArtists();
+        if (isMobile()) closeSidebar();
+      });
+    });
+
+    document.querySelectorAll("[data-action='scrollToOrder']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scrollToOrder();
+        if (isMobile()) closeSidebar();
+      });
+    });
+
     // Language toggles
     langNb.addEventListener("click", () => setLanguage("nb"));
     langEn.addEventListener("click", () => setLanguage("en"));
@@ -2085,13 +2150,30 @@ body{
       }
     });
 
+    function handleCountryAmericanaHash() {
+      if (window.location.hash !== "#country-americana") return;
+
+      openGenre("country", { scroll: false });
+
+      const countrySection = document.getElementById("country-americana");
+      if (!countrySection) return;
+
+      countrySection.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+
+      const firstPlayButton = countrySection.querySelector(".play-button");
+      if (firstPlayButton) firstPlayButton.classList.add("glow");
+    }
+
     // Init
     async function initApp(){
       await hydrateGenrePoolsFromGitHub();
       applyDailyGenreRotations(3);
       render();
       setLanguage(lang);
+      handleCountryAmericanaHash();
     }
+
+    window.addEventListener("hashchange", handleCountryAmericanaHash);
 
     initApp();
   </script>
