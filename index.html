@@ -626,6 +626,31 @@ body{
       cursor:pointer;
       text-align:left;
     }
+
+    /* Standard alle play-knapper */
+    .play-button {
+      box-shadow: 0 0 8px rgba(100,150,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    /* Hover */
+    .play-button:hover {
+      box-shadow: 0 0 16px rgba(100,150,255,0.5);
+      transform: scale(1.05);
+    }
+
+    /* NYESTE teaser (siste element i listen) */
+    .track-row:last-child .play-button {
+      animation: pulseGlow 2.5s ease-in-out infinite;
+    }
+
+    /* Puls */
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 6px rgba(100,150,255,0.2); }
+      50% { box-shadow: 0 0 18px rgba(100,150,255,0.7); }
+      100% { box-shadow: 0 0 6px rgba(100,150,255,0.2); }
+    }
+
     .track-btn:hover{
       background: rgba(255,255,255,.06);
       border-color: rgba(255,255,255,.16);
