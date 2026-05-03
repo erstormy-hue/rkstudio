@@ -1484,7 +1484,10 @@ body{
     const nowTitle = document.getElementById("nowTitle");
     const nowToggle = document.getElementById("nowToggle");
     const nowStop = document.getElementById("nowStop");
-    const scrollToDemos = () => document.getElementById("demos")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"});
+    const scrollToDemos = () => {
+      document.getElementById("demos")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"});
+      openGenre("rnb", { scroll: true });
+    };
     const scrollToArtists = () => document.getElementById("forArtists")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
     const scrollToOrder = () => document.getElementById("forOrder")?.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
     const nowFill = document.getElementById("nowFill");
@@ -2100,6 +2103,27 @@ body{
     document.querySelectorAll("[data-action='scrollTop']").forEach(btn => {
       btn.addEventListener("click", () => {
         window.scrollTo({ top:0, behavior: reduceMotion ? "auto" : "smooth" });
+        if (isMobile()) closeSidebar();
+      });
+    });
+
+    document.querySelectorAll("[data-action='scrollToDemos']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scrollToDemos();
+        if (isMobile()) closeSidebar();
+      });
+    });
+
+    document.querySelectorAll("[data-action='scrollToArtists']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scrollToArtists();
+        if (isMobile()) closeSidebar();
+      });
+    });
+
+    document.querySelectorAll("[data-action='scrollToOrder']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scrollToOrder();
         if (isMobile()) closeSidebar();
       });
     });
