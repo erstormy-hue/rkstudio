@@ -177,10 +177,18 @@ body{
       bottom: 18px;
       width: var(--sidebar-w);
       padding: 16px;
-      z-index: 60;
+      z-index: 75;
       display:flex;
       flex-direction:column;
       gap: 14px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+    }
+
+    body.menu-open{
+      overflow: hidden;
     }
 
     main.main{
@@ -200,33 +208,34 @@ body{
       background: rgba(0,0,0,.55);
       z-index: 65;
     }
+    .scrim[data-mode="order"]{
+      z-index: 105;
+    }
 
     /* Sidebar content */
     .brand{
       display:flex;
       align-items:center;
       gap: 12px;
-      padding: 10px 10px 8px;
+      padding: 10px;
       border-radius: 18px;
       background: rgba(255,255,255,.035);
       border: 1px solid rgba(255,255,255,.08);
     }
     .brand-badge{
-      width:44px;height:44px;
+      width:64px;
+      height:52px;
       border-radius: 12px;
-      display:grid;
-      place-items:center;
-      font-weight: 900;
-      letter-spacing: .5px;
-      color: #0b1020;
-      background: linear-gradient(180deg, rgba(242,201,76,1), rgba(242,201,76,.72));
+      display:block;
+      object-fit: contain;
+      background: rgba(255,255,255,.06);
       box-shadow: 0 14px 30px rgba(242,201,76,.12);
       user-select:none;
     }
     .brand-title{
       font-weight: 900;
       letter-spacing:.6px;
-      font-size: 14px;
+      font-size: 13px;
       line-height:1.1;
     }
     .brand-sub{
@@ -300,6 +309,35 @@ body{
       border-color: rgba(121,184,255,.35);
       box-shadow: 0 0 0 2px rgba(121,184,255,.14);
       background: rgba(121,184,255,.08);
+    }
+
+    .spotify-link{
+      justify-content:center;
+      font-weight:900;
+      text-align:left;
+      line-height:1.25;
+    }
+
+    .killerhat-panel{
+      display:block;
+      min-height: 180px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(3,7,18,.10), rgba(3,7,18,.82) 78%),
+        url("images/rk-killerhat.png");
+      background-size: cover;
+      background-position: center;
+      box-shadow: inset 0 0 44px rgba(0,0,0,.34);
+      opacity: .30;
+      text-decoration:none;
+      cursor:pointer;
+      transition: opacity .16s ease, border-color .16s ease, transform .16s ease;
+    }
+    .killerhat-panel:hover{
+      opacity: .45;
+      border-color: rgba(242,201,76,.42);
+      transform: translateY(-1px);
     }
 
     .sidebar-footer{
@@ -849,8 +887,130 @@ body{
       margin: 10px 0;
     }
 
+    /* Order drawer */
+    body.drawer-open{
+      overflow:hidden;
+    }
+    .order-drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(480px, 100vw);
+      z-index: 110;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(8,18,34,.98), rgba(3,7,18,.99));
+      border-left: 1px solid rgba(255,255,255,.16);
+      box-shadow: -22px 0 54px rgba(0,0,0,.50);
+      transform: translateX(100%);
+      transition: transform .22s ease;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+    }
+    .order-drawer.open{ transform: translateX(0); }
+    .order-drawer[hidden]{ display:block; visibility:hidden; pointer-events:none; }
+    .order-drawer.open[hidden]{ visibility:visible; pointer-events:auto; }
+    .drawer-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .drawer-title{
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: .01em;
+    }
+    .drawer-sub{
+      margin: 8px 0 0;
+      color: rgba(233,238,252,.72);
+      line-height: 1.45;
+    }
+    .order-form{
+      display:grid;
+      gap: 14px;
+    }
+    .form-row{
+      display:grid;
+      gap: 7px;
+    }
+    .form-row label{
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(233,238,252,.76);
+    }
+    .form-row input,
+    .form-row select,
+    .form-row textarea{
+      width:100%;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 14px;
+      background: rgba(255,255,255,.055);
+      color: var(--ink);
+      padding: 13px 14px;
+      font: inherit;
+      line-height: 1.35;
+    }
+    .form-row select{
+      cursor:pointer;
+    }
+    .form-row option{
+      color:#101827;
+      background:#f7f9ff;
+    }
+    .form-row textarea{
+      min-height: 116px;
+      resize: vertical;
+    }
+    .form-row input[readonly]{
+      color: rgba(233,238,252,.82);
+      background: rgba(255,255,255,.035);
+    }
+    .form-hint{
+      margin: 0;
+      color: rgba(233,238,252,.58);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .mail-row{
+      grid-template-columns: 1fr auto;
+      align-items:end;
+      gap: 10px;
+    }
+    .mail-row .btn{
+      min-height: 48px;
+      padding: 13px 18px;
+      justify-content:center;
+      white-space:nowrap;
+    }
+    .drawer-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    @media (max-width: 700px){
+      .order-drawer{
+        width: 100vw;
+        padding: 16px;
+      }
+      .mail-row{
+        grid-template-columns: 1fr;
+      }
+      .mail-row .btn{
+        width: 100%;
+      }
+    }
+
     /* Responsive */
-    @media (max-width: 980px){
+    @media (max-width: 1100px){
       main.main{
         padding-left: 18px;
         padding-top: 70px;
@@ -861,12 +1021,64 @@ body{
         top: 14px;
         bottom: 14px;
         width: min(var(--sidebar-w), calc(100vw - 28px));
+        background: linear-gradient(180deg, rgba(8,18,34,.96), rgba(4,10,22,.98));
+        border-color: rgba(255,255,255,.22);
         transform: translateX(calc(-100% - 22px));
         transition: transform .18s ease;
       }
       aside.sidebar.open{ transform: translateX(0); }
       .grid{ grid-template-columns: 1fr; }
       .now{ right: 14px; bottom: 14px; }
+    }
+
+    @media (min-width: 701px) and (max-width: 1100px){
+      main.main{
+        padding: 18px;
+        padding-top: 74px;
+      }
+
+      header.hero{
+        min-height: auto;
+        padding: 18px;
+        background-position: 62% center;
+      }
+
+      .hero-top{
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .hero-nav{
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px 16px;
+        margin-bottom: 24px;
+      }
+
+      .hero-lang{
+        margin-left: 0;
+      }
+
+      .hero h1{
+        font-size: clamp(34px, 5vw, 48px);
+      }
+
+      .hero p{
+        max-width: 62ch;
+      }
+
+      .hero-cards{
+        width: 100%;
+        grid-template-columns: 1fr;
+      }
+
+      .offer-card{
+        min-height: 300px;
+      }
+
+      .offer-card h3{
+        font-size: clamp(34px, 4.8vw, 44px);
+      }
     }
 
 
@@ -1006,9 +1218,9 @@ body{
 
     <aside id="sidebar" class="sidebar glass" aria-label="Studio navigator">
       <div class="brand">
-        <div class="brand-badge" aria-hidden="true">RK</div>
+        <img class="brand-badge" src="images/rk-studio-log.png" alt="" aria-hidden="true" />
         <div>
-          <div class="brand-title">THE RK STUDIO</div>
+          <div class="brand-title">RK STUDIO</div>
           <div class="brand-sub">
             <span class="lang nb">Låtskriving • Produksjon • AI-assistert</span>
             <span class="lang en">Songwriting • Production • AI assisted</span>
@@ -1037,7 +1249,12 @@ body{
         <div id="genreNav" class="genre-nav" role="list"></div>
       </div>
 
-      <a class="btn primary" href="https://open.spotify.com/album/1KUctHx3iPXNGyUuQNXf8E" target="_blank" rel="noopener noreferrer" style="justify-content:center; font-weight:900;">▶ RK Album</a>
+      <a class="btn primary spotify-link" href="https://open.spotify.com/album/1KUctHx3iPXNGyUuQNXf8E" target="_blank" rel="noopener noreferrer">▶ The ReplacementKiller - Rust and Dust on Spotify</a>
+
+      <a class="killerhat-panel" href="https://open.spotify.com/album/1KUctHx3iPXNGyUuQNXf8E" target="_blank" rel="noopener noreferrer"
+        data-aria-nb="Åpne The ReplacementKiller - Rust and Dust på Spotify"
+        data-aria-en="Open The ReplacementKiller - Rust and Dust on Spotify"
+      ></a>
 
       <div class="sidebar-footer">
         <div><span class="lang nb">Prototype / demo</span><span class="lang en">Prototype / demo</span></div>
@@ -1064,8 +1281,8 @@ body{
             <div class="hero-title">
               <h2 class="hero-kicker"><span class="lang nb">IDÉLEVERANDØR FOR MODERNE MUSIKK</span><span class="lang en">IDEA SUPPLIER FOR MODERN MUSIC</span></h2>
               <h1><span class="lang nb">AI-assisterte demoer<br/>og skreddersydde låter</span><span class="lang en">AI-assisted demos<br/>and custom songs</span></h1>
-              <p class="lang nb">Mastering og opp lyd er kun for å gi best mulig lydbilde.<br/>Idéleveransen kan utvikles videre i ditt eget studio<br/>med analoge instrumenter og vokal.</p>
-              <p class="lang en">Mastering and loudness are only used to present the best possible sound image.<br/>The idea can be developed further in your own studio<br/>with real vocals and analogue instruments.</p>
+              <p class="lang nb">Mastering og sound er kun for å gi best mulig lydbilde.<br/>Idéleveransen kan utvikles videre i ditt eget studio<br/>med analoge instrumenter og vokal.</p>
+              <p class="lang en">Mastering and sound are only used to present the best possible sound image.<br/>The idea can be developed further in your own studio<br/>with real vocals and analogue instruments.</p>
             </div>
           </div>
 
@@ -1094,7 +1311,7 @@ body{
                 <li><span class="lang nb">Alle sjangre, tilpasset deg</span><span class="lang en">Any genre, tailored to you</span></li>
               </ul>
               <div class="cta-buttons">
-                <a href="/bestill" class="btn primary"><span class="lang nb">BESTILL DIN LÅT</span><span class="lang en">ORDER YOUR SONG</span></a>
+                <button class="btn primary" type="button" data-action="openOrder"><span class="lang nb">BESTILL DIN LÅT</span><span class="lang en">ORDER YOUR SONG</span></button>
                 <a href="#country-americana" class="btn secondary teaser-btn">Teaser</a>
               </div>
             </article>
@@ -1213,6 +1430,97 @@ body{
         </div>
       </div>
     </section>
+
+    <!-- ORDER DRAWER -->
+    <aside id="orderDrawer" class="order-drawer" hidden aria-hidden="true" aria-labelledby="orderTitle">
+      <div class="drawer-head">
+        <div>
+          <h3 id="orderTitle" class="drawer-title"><span class="lang nb">Bestill din låt</span><span class="lang en">Order your song</span></h3>
+          <p class="drawer-sub">
+            <span class="lang nb">Fortell oss historien – vi lager låten.</span>
+            <span class="lang en">Tell us the story – we create the song.</span>
+          </p>
+        </div>
+        <button id="closeOrder" class="icon-btn" type="button"
+          data-aria-nb="Lukk bestillingsskjema"
+          data-aria-en="Close order form"
+          title="Close"
+        >✕</button>
+      </div>
+
+      <form id="orderForm" class="order-form">
+        <div class="form-row mail-row">
+          <div>
+            <label for="orderEmail"><span class="lang nb">E-post til</span><span class="lang en">Email to</span></label>
+            <input id="orderEmail" type="email" value="studio@rkstudio.no" readonly />
+          </div>
+          <button class="btn primary amber" type="submit"><span class="lang nb">Send</span><span class="lang en">Send</span></button>
+        </div>
+
+        <div class="form-row">
+          <label for="orderOccasion"><span class="lang nb">Anledning</span><span class="lang en">Occasion</span></label>
+          <select id="orderOccasion" name="occasion">
+            <option data-nb="Bryllup" data-en="Wedding">Bryllup</option>
+            <option data-nb="Bursdag" data-en="Birthday">Bursdag</option>
+            <option data-nb="Konfirmasjon" data-en="Confirmation">Konfirmasjon</option>
+            <option data-nb="Jubileum" data-en="Anniversary">Jubileum</option>
+            <option data-nb="Kjærlighetshistorie" data-en="Love story">Kjærlighetshistorie</option>
+            <option data-nb="Annet" data-en="Other">Annet</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="orderStory"><span class="lang nb">Fortell mest mulig om personen / historien</span><span class="lang en">Tell us as much as possible about the person / story</span></label>
+          <textarea id="orderStory" name="story"
+            data-placeholder-nb="Fyll på med masse info: hvem låten handler om, anledning, navn, minner, stemning, små historier og detaljer som bør med..."
+            data-placeholder-en="Share as much information as possible: who the song is about, the occasion, names, memories, mood, small stories and details that should be included..."
+            placeholder="Fyll på med masse info: hvem låten handler om, anledning, navn, minner, stemning, små historier og detaljer som bør med..."
+          ></textarea>
+          <p class="form-hint"><span class="lang nb">Tips: skriv heller for mye enn for lite. Teksten tar vi oss av.</span><span class="lang en">Tip: share more rather than less. We will take care of the lyrics.</span></p>
+        </div>
+
+        <div class="form-row">
+          <label for="orderGenre"><span class="lang nb">Stil / sjanger</span><span class="lang en">Style / genre</span></label>
+          <select id="orderGenre" name="genre">
+            <option data-nb="Pop" data-en="Pop">Pop</option>
+            <option data-nb="Rock" data-en="Rock">Rock</option>
+            <option data-nb="Country / Americana" data-en="Country / Americana">Country / Americana</option>
+            <option data-nb="EDM" data-en="EDM">EDM</option>
+            <option data-nb="Cinematic / film" data-en="Cinematic / film">Cinematic / film</option>
+            <option data-nb="Alternativ" data-en="Alternative">Alternativ</option>
+            <option data-nb="Overrask meg" data-en="Surprise me">Overrask meg</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="orderLanguage"><span class="lang nb">Språk</span><span class="lang en">Language</span></label>
+          <select id="orderLanguage" name="language">
+            <option data-nb="Norsk" data-en="Norwegian">Norsk</option>
+            <option data-nb="Engelsk" data-en="English">Engelsk</option>
+            <option data-nb="Begge" data-en="Both">Begge</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="orderMood"><span class="lang nb">Stemning</span><span class="lang en">Mood</span></label>
+          <select id="orderMood" name="mood">
+            <option data-nb="Glad / energisk" data-en="Happy / energetic">Glad / energisk</option>
+            <option data-nb="Rolig / varm" data-en="Calm / warm">Rolig / varm</option>
+            <option data-nb="Mørk / melankolsk" data-en="Dark / melancholic">Mørk / melankolsk</option>
+            <option data-nb="Episk / filmatisk" data-en="Epic / cinematic">Episk / filmatisk</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="orderDetails"><span class="lang nb">Ekstra detaljer</span><span class="lang en">Extra details</span></label>
+          <textarea id="orderDetails" name="details"
+            data-placeholder-nb="Spesielle ønsker? Tempo, artist-vibe, referanser eller detaljer som bør med..."
+            data-placeholder-en="Any special wishes? Tempo, artist vibe, references or details that should be included..."
+            placeholder="Spesielle ønsker? Tempo, artist-vibe, referanser eller detaljer som bør med..."
+          ></textarea>
+        </div>
+      </form>
+    </aside>
 
     <!-- NOW PLAYING -->
     <section id="now" class="now glass" hidden aria-label="Now playing">
@@ -1506,6 +1814,9 @@ body{
     const aboutBtnSide = document.getElementById("aboutBtnSide");
     const aboutModal = document.getElementById("aboutModal");
     const closeAbout = document.getElementById("closeAbout");
+    const orderDrawer = document.getElementById("orderDrawer");
+    const closeOrder = document.getElementById("closeOrder");
+    const orderForm = document.getElementById("orderForm");
 
     const langNb = document.getElementById("langNb");
     const langEn = document.getElementById("langEn");
@@ -1557,7 +1868,7 @@ body{
     }
 
     function isMobile(){
-      return window.matchMedia && window.matchMedia("(max-width: 980px)").matches;
+      return window.matchMedia && window.matchMedia("(max-width: 1100px)").matches;
     }
 
     function setScrim(mode){
@@ -1573,11 +1884,13 @@ body{
 
     function openSidebar(){
       sidebar.classList.add("open");
+      body.classList.add("menu-open");
       menuBtn.setAttribute("aria-expanded","true");
       if (isMobile()) setScrim("sidebar");
     }
     function closeSidebar(){
       sidebar.classList.remove("open");
+      body.classList.remove("menu-open");
       menuBtn.setAttribute("aria-expanded","false");
       if (isMobile()) setScrim("none");
     }
@@ -1596,6 +1909,16 @@ body{
       }
     }
 
+    function applyOrderFormLang(){
+      orderForm.querySelectorAll("[data-placeholder-nb][data-placeholder-en]").forEach((el) => {
+        el.setAttribute("placeholder", lang === "nb" ? el.dataset.placeholderNb : el.dataset.placeholderEn);
+      });
+
+      orderForm.querySelectorAll("option[data-nb][data-en]").forEach((option) => {
+        option.textContent = lang === "nb" ? option.dataset.nb : option.dataset.en;
+      });
+    }
+
     function setLanguage(newLang){
       lang = (newLang === "en") ? "en" : "nb";
       localStorage.setItem("rk_lang", lang);
@@ -1610,6 +1933,7 @@ body{
 
       // Aria labels byttes (viktig for skjermleser)
       applyAriaLang();
+      applyOrderFormLang();
     }
 
     function syncNowToggleLabel(state){
@@ -2063,6 +2387,7 @@ body{
     function openAbout(){
       lastFocus = document.activeElement;
 
+      closeOrderDrawer({ restoreFocus: false });
       aboutModal.hidden = false;
       aboutModal.setAttribute("aria-hidden","false");
       setScrim("modal");
@@ -2082,12 +2407,49 @@ body{
       lastFocus = null;
     }
 
+    function openOrderDrawer(){
+      lastFocus = document.activeElement;
+
+      if (!aboutModal.hidden) closeAboutModal();
+      if (isMobile()) closeSidebar();
+
+      window.clearTimeout(closeOrderDrawer._t);
+      orderDrawer.hidden = false;
+      orderDrawer.setAttribute("aria-hidden","false");
+      body.classList.add("drawer-open");
+      setScrim("order");
+
+      requestAnimationFrame(() => {
+        orderDrawer.classList.add("open");
+        document.getElementById("orderStory")?.focus();
+      });
+    }
+
+    function closeOrderDrawer(opts = {}){
+      if (!orderDrawer || orderDrawer.hidden) return;
+
+      const restoreFocus = opts.restoreFocus !== false;
+      orderDrawer.classList.remove("open");
+      orderDrawer.setAttribute("aria-hidden","true");
+      body.classList.remove("drawer-open");
+      setScrim("none");
+
+      window.clearTimeout(closeOrderDrawer._t);
+      closeOrderDrawer._t = window.setTimeout(() => {
+        orderDrawer.hidden = true;
+      }, 220);
+
+      if (restoreFocus && lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      if (restoreFocus) lastFocus = null;
+    }
+
     function trapTab(e){
-      if (aboutModal.hidden) return;
       if (e.key !== "Tab") return;
 
-      const card = aboutModal.querySelector(".modal-card");
-      const focusables = getFocusable(card);
+      const container = !aboutModal.hidden ? aboutModal.querySelector(".modal-card") : (orderDrawer.classList.contains("open") ? orderDrawer : null);
+      if (!container) return;
+
+      const focusables = getFocusable(container);
       if (focusables.length === 0) return;
 
       const first = focusables[0];
@@ -2103,6 +2465,39 @@ body{
     aboutBtn.addEventListener("click", openAbout);
     aboutBtnSide.addEventListener("click", openAbout);
     closeAbout.addEventListener("click", closeAboutModal);
+    closeOrder.addEventListener("click", () => closeOrderDrawer());
+
+    orderForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const occasion = document.getElementById("orderOccasion").value;
+      const story = document.getElementById("orderStory").value.trim();
+      const genre = document.getElementById("orderGenre").value;
+      const songLanguage = document.getElementById("orderLanguage").value;
+      const mood = document.getElementById("orderMood").value;
+      const details = document.getElementById("orderDetails").value.trim();
+
+      const subject = lang === "nb" ? `Bestilling av låt – ${occasion}` : `Song order – ${occasion}`;
+      const bodyText = lang === "nb"
+        ? [
+          `Anledning: ${occasion}`,
+          `Historie: ${story || ""}`,
+          `Sjanger: ${genre}`,
+          `Språk: ${songLanguage}`,
+          `Stemning: ${mood}`,
+          `Ekstra ønsker: ${details || ""}`
+        ].join("\n")
+        : [
+          `Occasion: ${occasion}`,
+          `Story: ${story || ""}`,
+          `Genre: ${genre}`,
+          `Language: ${songLanguage}`,
+          `Mood: ${mood}`,
+          `Extra wishes: ${details || ""}`
+        ].join("\n");
+
+      window.location.href = `mailto:studio@rkstudio.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+    });
 
     // click outside card closes
     aboutModal.addEventListener("click", (e) => {
@@ -2114,6 +2509,7 @@ body{
       const mode = scrim.dataset.mode || "";
       if (mode === "sidebar") closeSidebar();
       if (mode === "modal") closeAboutModal();
+      if (mode === "order") closeOrderDrawer();
       setScrim("none");
     });
 
@@ -2121,6 +2517,7 @@ body{
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape"){
         if (!aboutModal.hidden){ closeAboutModal(); return; }
+        if (orderDrawer.classList.contains("open")){ closeOrderDrawer(); return; }
         if (isMobile() && sidebar.classList.contains("open")){ closeSidebar(); return; }
       }
       trapTab(e);
@@ -2131,6 +2528,10 @@ body{
       const open = sidebar.classList.contains("open");
       if (open) closeSidebar();
       else openSidebar();
+    });
+
+    document.querySelectorAll("[data-action='openOrder']").forEach(btn => {
+      btn.addEventListener("click", openOrderDrawer);
     });
 
     // Nav actions
@@ -2171,6 +2572,7 @@ body{
       if (!isMobile()){
         scrim.hidden = true;
         sidebar.classList.remove("open");
+        body.classList.remove("menu-open");
         menuBtn.setAttribute("aria-expanded","false");
       }
     });
