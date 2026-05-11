@@ -208,7 +208,8 @@ body{
       background: rgba(0,0,0,.55);
       z-index: 65;
     }
-    .scrim[data-mode="order"]{
+    .scrim[data-mode="order"],
+    .scrim[data-mode="artist"]{
       z-index: 105;
     }
 
@@ -891,7 +892,8 @@ body{
     body.drawer-open{
       overflow:hidden;
     }
-    .order-drawer{
+    .order-drawer,
+    .artist-drawer{
       position: fixed;
       top: 0;
       right: 0;
@@ -909,9 +911,108 @@ body{
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
     }
-    .order-drawer.open{ transform: translateX(0); }
-    .order-drawer[hidden]{ display:block; visibility:hidden; pointer-events:none; }
-    .order-drawer.open[hidden]{ visibility:visible; pointer-events:auto; }
+    .order-drawer.open,
+    .artist-drawer.open{ transform: translateX(0); }
+    .order-drawer[hidden],
+    .artist-drawer[hidden]{ display:block; visibility:hidden; pointer-events:none; }
+    .order-drawer.open[hidden],
+    .artist-drawer.open[hidden]{ visibility:visible; pointer-events:auto; }
+    .artist-drawer{
+      background:
+        radial-gradient(700px 420px at 22% 12%, rgba(143,99,255,.34), transparent 62%),
+        radial-gradient(620px 460px at 92% 28%, rgba(79,155,255,.20), transparent 64%),
+        linear-gradient(180deg, rgba(9,9,15,.98), rgba(6,7,18,.99));
+      border-left-color: rgba(143,123,255,.34);
+      box-shadow:
+        -24px 0 64px rgba(0,0,0,.58),
+        inset 1px 0 0 rgba(255,255,255,.08),
+        inset 0 0 42px rgba(143,99,255,.10);
+      isolation:isolate;
+    }
+    .artist-drawer::before,
+    .artist-drawer::after{
+      content:"";
+      position:fixed;
+      pointer-events:none;
+      z-index:-1;
+    }
+    .artist-drawer::before{
+      inset:-18%;
+      background:
+        radial-gradient(360px 260px at 28% 20%, rgba(143,99,255,.24), transparent 68%),
+        radial-gradient(320px 240px at 78% 46%, rgba(92,176,255,.14), transparent 70%),
+        repeating-linear-gradient(115deg, rgba(255,255,255,.035) 0 1px, transparent 1px 18px);
+      filter: blur(.2px);
+      opacity:.72;
+      animation: artistGlowDrift 18s ease-in-out infinite alternate;
+    }
+    .artist-drawer::after{
+      inset: 12px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
+      box-shadow: inset 0 1px 34px rgba(255,255,255,.045);
+    }
+    @keyframes artistGlowDrift{
+      0%{ transform: translate3d(-1.5%, -1%, 0) scale(1); }
+      100%{ transform: translate3d(1.5%, 1%, 0) scale(1.03); }
+    }
+    .artist-drawer .drawer-head,
+    .artist-drawer .order-form{
+      position:relative;
+      z-index:1;
+    }
+    .artist-drawer .drawer-title{
+      color:#f1efff;
+      text-shadow: 0 0 26px rgba(143,99,255,.32);
+    }
+    .artist-drawer .drawer-sub{
+      color: rgba(233,238,252,.78);
+    }
+    .artist-drawer .form-row input,
+    .artist-drawer .form-row select,
+    .artist-drawer .form-row textarea{
+      border-color: rgba(170,145,255,.20);
+      background: rgba(255,255,255,.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .artist-drawer .form-row input:focus,
+    .artist-drawer .form-row select:focus,
+    .artist-drawer .form-row textarea:focus{
+      box-shadow: 0 0 0 3px rgba(143,99,255,.30), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .artist-checkbox{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(170,145,255,.20);
+      background: rgba(255,255,255,.045);
+      color: rgba(233,238,252,.76);
+      line-height:1.45;
+      font-size: 13px;
+    }
+    .artist-checkbox input{
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      margin-top: 2px;
+      accent-color: #8f63ff;
+    }
+    .btn.artist-submit{
+      width:100%;
+      justify-content:center;
+      background: linear-gradient(180deg, rgba(143,99,255,.98), rgba(85,68,205,.88));
+      color:#fff;
+      border-color: rgba(170,145,255,.50);
+      box-shadow: 0 18px 34px rgba(75,55,190,.24);
+      font-weight:900;
+    }
+    .btn.artist-submit:hover{
+      filter: brightness(1.04);
+      border-color: rgba(205,190,255,.70);
+    }
     .drawer-head{
       display:flex;
       align-items:flex-start;
@@ -997,7 +1098,8 @@ body{
     }
 
     @media (max-width: 700px){
-      .order-drawer{
+      .order-drawer,
+      .artist-drawer{
         width: 100vw;
         padding: 16px;
       }
@@ -1107,6 +1209,7 @@ body{
     @media (prefers-reduced-motion: reduce){
       body::before{ animation: none; }
       .wave.playing{ animation: none; }
+      .artist-drawer::before{ animation: none; }
       .lift, .chev, aside.sidebar{ transition: none; }
     }
     /* iPad og mindre: skjul gitar */
@@ -1297,7 +1400,10 @@ body{
                 <li><span class="lang nb">Perfekt som startpunkt</span><span class="lang en">Perfect starting point</span></li>
                 <li><span class="lang nb">Utvikle med eget band, vokal og instrumenter</span><span class="lang en">Develop with your own band, vocals and instruments</span></li>
               </ul>
-              <button class="btn primary purple" type="button" data-action="scrollToDemos">EXPLORE DEMOS</button>
+              <div class="cta-buttons">
+                <button class="btn primary purple" type="button" data-action="scrollToDemos">EXPLORE DEMOS</button>
+                <button class="btn secondary" type="button" data-action="openArtistContact"><span class="lang nb">Kontakt / samarbeid</span><span class="lang en">Contact / collaboration</span></button>
+              </div>
             </article>
 
             <article id="forOrder" class="offer-card order">
@@ -1519,6 +1625,109 @@ body{
             placeholder="Spesielle ønsker? Tempo, artist-vibe, referanser eller detaljer som bør med..."
           ></textarea>
         </div>
+      </form>
+    </aside>
+
+    <!-- ARTIST CONTACT DRAWER -->
+    <aside id="artistDrawer" class="artist-drawer" hidden aria-hidden="true" aria-labelledby="artistTitle">
+      <div class="drawer-head">
+        <div>
+          <h3 id="artistTitle" class="drawer-title"><span class="lang nb">FOR ARTISTER</span><span class="lang en">FOR ARTISTS</span></h3>
+          <p class="drawer-sub">
+            <span class="lang nb">Send inn retning, idé eller behov – så ser vi om RK Studio kan bidra med hooks, demoer eller produksjonsretning.</span>
+            <span class="lang en">Send your direction, idea or need – and we will see whether RK Studio can contribute hooks, demos or production direction.</span>
+          </p>
+        </div>
+        <button id="closeArtist" class="icon-btn" type="button"
+          data-aria-nb="Lukk artistforespørsel"
+          data-aria-en="Close artist request"
+          title="Close"
+        >✕</button>
+      </div>
+
+      <form id="artistForm" class="order-form">
+        <div class="form-row">
+          <label for="artistName"><span class="lang nb">Artistnavn / navn</span><span class="lang en">Artist name / name</span></label>
+          <input id="artistName" name="artistName" type="text" autocomplete="name" />
+        </div>
+
+        <div class="form-row">
+          <label for="artistEmail"><span class="lang nb">E-post</span><span class="lang en">Email</span></label>
+          <input id="artistEmail" name="artistEmail" type="email" autocomplete="email" />
+        </div>
+
+        <div class="form-row">
+          <label for="artistNeed"><span class="lang nb">Hva ser du etter?</span><span class="lang en">What are you looking for?</span></label>
+          <select id="artistNeed" name="need">
+            <option data-nb="Hook / refreng-idé" data-en="Hook / chorus idea">Hook / refreng-idé</option>
+            <option data-nb="Låtidé / demo" data-en="Song idea / demo">Låtidé / demo</option>
+            <option data-nb="Tekstlinjer / tema" data-en="Lyric lines / theme">Tekstlinjer / tema</option>
+            <option data-nb="Produksjonsretning" data-en="Production direction">Produksjonsretning</option>
+            <option data-nb="Co-writing / samarbeid" data-en="Co-writing / collaboration">Co-writing / samarbeid</option>
+            <option data-nb="Annet" data-en="Other">Annet</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="artistGenre"><span class="lang nb">Sjanger / stil</span><span class="lang en">Genre / style</span></label>
+          <select id="artistGenre" name="genre">
+            <option data-nb="Pop" data-en="Pop">Pop</option>
+            <option data-nb="Rock" data-en="Rock">Rock</option>
+            <option data-nb="Country / Americana" data-en="Country / Americana">Country / Americana</option>
+            <option data-nb="R&B" data-en="R&B">R&B</option>
+            <option data-nb="EDM" data-en="EDM">EDM</option>
+            <option data-nb="Film / cinematic" data-en="Film / cinematic">Film / cinematic</option>
+            <option data-nb="Alternative" data-en="Alternative">Alternative</option>
+            <option data-nb="Annet" data-en="Other">Annet</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="artistHelp"><span class="lang nb">Hva ønsker du hjelp til?</span><span class="lang en">What would you like help with?</span></label>
+          <textarea id="artistHelp" name="help"
+            data-placeholder-nb="Beskriv idéen, retningen, låten, prosjektet eller utfordringen du vil utforske..."
+            data-placeholder-en="Describe the idea, direction, song, project or challenge you want to explore..."
+            placeholder="Beskriv idéen, retningen, låten, prosjektet eller utfordringen du vil utforske..."
+          ></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="artistUse"><span class="lang nb">Hvordan vil ideen brukes?</span><span class="lang en">How will the idea be used?</span></label>
+          <select id="artistUse" name="use">
+            <option data-nb="Kun inspirasjon" data-en="Inspiration only">Kun inspirasjon</option>
+            <option data-nb="Mulig videre samarbeid" data-en="Possible further collaboration">Mulig videre samarbeid</option>
+            <option data-nb="Ønsker demo som utgangspunkt" data-en="I want a demo as a starting point">Ønsker demo som utgangspunkt</option>
+            <option data-nb="Vurderer utgivelse" data-en="Considering release">Vurderer utgivelse</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="artistLanguage"><span class="lang nb">Språk</span><span class="lang en">Language</span></label>
+          <select id="artistLanguage" name="language">
+            <option data-nb="Norsk" data-en="Norwegian">Norsk</option>
+            <option data-nb="Engelsk" data-en="English">Engelsk</option>
+            <option data-nb="Begge deler" data-en="Both">Begge deler</option>
+          </select>
+        </div>
+
+        <label class="artist-checkbox" for="artistCredit">
+          <input id="artistCredit" name="credit" type="checkbox" required />
+          <span>
+            <span class="lang nb">Jeg forstår at dersom idé, tekst, hook, demo eller produksjonsbidrag fra RK Studio brukes i en utgivelse, skal Erling Stormyr Jensen / RK Studio krediteres etter avtale.</span>
+            <span class="lang en">I understand that if an idea, lyric, hook, demo or production contribution from RK Studio is used in a release, Erling Stormyr Jensen / RK Studio must be credited by agreement.</span>
+          </span>
+        </label>
+
+        <div class="form-row">
+          <label for="artistNote"><span class="lang nb">Ekstra notat</span><span class="lang en">Extra note</span></label>
+          <textarea id="artistNote" name="note"
+            data-placeholder-nb="Lenker, referanser, artist-vibe, tidsplan eller annet som er nyttig å vite..."
+            data-placeholder-en="Links, references, artist vibe, timeline or anything else useful to know..."
+            placeholder="Lenker, referanser, artist-vibe, tidsplan eller annet som er nyttig å vite..."
+          ></textarea>
+        </div>
+
+        <button class="btn artist-submit" type="submit"><span class="lang nb">Send artistforespørsel</span><span class="lang en">Send artist request</span></button>
       </form>
     </aside>
 
@@ -1817,6 +2026,9 @@ body{
     const orderDrawer = document.getElementById("orderDrawer");
     const closeOrder = document.getElementById("closeOrder");
     const orderForm = document.getElementById("orderForm");
+    const artistDrawer = document.getElementById("artistDrawer");
+    const closeArtist = document.getElementById("closeArtist");
+    const artistForm = document.getElementById("artistForm");
 
     const langNb = document.getElementById("langNb");
     const langEn = document.getElementById("langEn");
@@ -1872,7 +2084,7 @@ body{
     }
 
     function setScrim(mode){
-      // mode: "none" | "sidebar" | "modal"
+      // mode: "none" | "sidebar" | "modal" | "order" | "artist"
       if (mode === "none"){
         scrim.hidden = true;
         scrim.dataset.mode = "";
@@ -1910,12 +2122,14 @@ body{
     }
 
     function applyOrderFormLang(){
-      orderForm.querySelectorAll("[data-placeholder-nb][data-placeholder-en]").forEach((el) => {
-        el.setAttribute("placeholder", lang === "nb" ? el.dataset.placeholderNb : el.dataset.placeholderEn);
-      });
+      [orderForm, artistForm].forEach((form) => {
+        form.querySelectorAll("[data-placeholder-nb][data-placeholder-en]").forEach((el) => {
+          el.setAttribute("placeholder", lang === "nb" ? el.dataset.placeholderNb : el.dataset.placeholderEn);
+        });
 
-      orderForm.querySelectorAll("option[data-nb][data-en]").forEach((option) => {
-        option.textContent = lang === "nb" ? option.dataset.nb : option.dataset.en;
+        form.querySelectorAll("option[data-nb][data-en]").forEach((option) => {
+          option.textContent = lang === "nb" ? option.dataset.nb : option.dataset.en;
+        });
       });
     }
 
@@ -2388,6 +2602,7 @@ body{
       lastFocus = document.activeElement;
 
       closeOrderDrawer({ restoreFocus: false });
+      closeArtistDrawer({ restoreFocus: false });
       aboutModal.hidden = false;
       aboutModal.setAttribute("aria-hidden","false");
       setScrim("modal");
@@ -2411,6 +2626,7 @@ body{
       lastFocus = document.activeElement;
 
       if (!aboutModal.hidden) closeAboutModal();
+      closeArtistDrawer({ restoreFocus: false });
       if (isMobile()) closeSidebar();
 
       window.clearTimeout(closeOrderDrawer._t);
@@ -2443,10 +2659,49 @@ body{
       if (restoreFocus) lastFocus = null;
     }
 
+    function openArtistDrawer(){
+      lastFocus = document.activeElement;
+
+      if (!aboutModal.hidden) closeAboutModal();
+      closeOrderDrawer({ restoreFocus: false });
+      if (isMobile()) closeSidebar();
+
+      window.clearTimeout(closeArtistDrawer._t);
+      artistDrawer.hidden = false;
+      artistDrawer.setAttribute("aria-hidden","false");
+      body.classList.add("drawer-open");
+      setScrim("artist");
+
+      requestAnimationFrame(() => {
+        artistDrawer.classList.add("open");
+        document.getElementById("artistName")?.focus();
+      });
+    }
+
+    function closeArtistDrawer(opts = {}){
+      if (!artistDrawer || artistDrawer.hidden) return;
+
+      const restoreFocus = opts.restoreFocus !== false;
+      artistDrawer.classList.remove("open");
+      artistDrawer.setAttribute("aria-hidden","true");
+      body.classList.remove("drawer-open");
+      setScrim("none");
+
+      window.clearTimeout(closeArtistDrawer._t);
+      closeArtistDrawer._t = window.setTimeout(() => {
+        artistDrawer.hidden = true;
+      }, 220);
+
+      if (restoreFocus && lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      if (restoreFocus) lastFocus = null;
+    }
+
     function trapTab(e){
       if (e.key !== "Tab") return;
 
-      const container = !aboutModal.hidden ? aboutModal.querySelector(".modal-card") : (orderDrawer.classList.contains("open") ? orderDrawer : null);
+      const container = !aboutModal.hidden
+        ? aboutModal.querySelector(".modal-card")
+        : (orderDrawer.classList.contains("open") ? orderDrawer : (artistDrawer.classList.contains("open") ? artistDrawer : null));
       if (!container) return;
 
       const focusables = getFocusable(container);
@@ -2466,6 +2721,7 @@ body{
     aboutBtnSide.addEventListener("click", openAbout);
     closeAbout.addEventListener("click", closeAboutModal);
     closeOrder.addEventListener("click", () => closeOrderDrawer());
+    closeArtist.addEventListener("click", () => closeArtistDrawer());
 
     orderForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -2499,6 +2755,47 @@ body{
       window.location.href = `mailto:studio@rkstudio.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
     });
 
+    artistForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const artistName = document.getElementById("artistName").value.trim();
+      const artistEmail = document.getElementById("artistEmail").value.trim();
+      const need = document.getElementById("artistNeed").value;
+      const genre = document.getElementById("artistGenre").value;
+      const help = document.getElementById("artistHelp").value.trim();
+      const use = document.getElementById("artistUse").value;
+      const artistLanguage = document.getElementById("artistLanguage").value;
+      const creditAccepted = document.getElementById("artistCredit").checked;
+      const note = document.getElementById("artistNote").value.trim();
+
+      const subject = "Artistforespørsel – RK Studio";
+      const bodyText = lang === "nb"
+        ? [
+          `Artistnavn / navn: ${artistName || ""}`,
+          `E-post: ${artistEmail || ""}`,
+          `Hva ser du etter?: ${need}`,
+          `Sjanger / stil: ${genre}`,
+          `Hva ønsker du hjelp til?: ${help || ""}`,
+          `Hvordan vil ideen brukes?: ${use}`,
+          `Språk: ${artistLanguage}`,
+          `Kreditering forstått: ${creditAccepted ? "Ja" : "Nei"}`,
+          `Ekstra notat: ${note || ""}`
+        ].join("\n")
+        : [
+          `Artist name / name: ${artistName || ""}`,
+          `Email: ${artistEmail || ""}`,
+          `Looking for: ${need}`,
+          `Genre / style: ${genre}`,
+          `Help wanted: ${help || ""}`,
+          `Idea usage: ${use}`,
+          `Language: ${artistLanguage}`,
+          `Credit understood: ${creditAccepted ? "Yes" : "No"}`,
+          `Extra note: ${note || ""}`
+        ].join("\n");
+
+      window.location.href = `mailto:studio@rkstudio.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+    });
+
     // click outside card closes
     aboutModal.addEventListener("click", (e) => {
       if (e.target === aboutModal) closeAboutModal();
@@ -2510,6 +2807,7 @@ body{
       if (mode === "sidebar") closeSidebar();
       if (mode === "modal") closeAboutModal();
       if (mode === "order") closeOrderDrawer();
+      if (mode === "artist") closeArtistDrawer();
       setScrim("none");
     });
 
@@ -2518,6 +2816,7 @@ body{
       if (e.key === "Escape"){
         if (!aboutModal.hidden){ closeAboutModal(); return; }
         if (orderDrawer.classList.contains("open")){ closeOrderDrawer(); return; }
+        if (artistDrawer.classList.contains("open")){ closeArtistDrawer(); return; }
         if (isMobile() && sidebar.classList.contains("open")){ closeSidebar(); return; }
       }
       trapTab(e);
@@ -2532,6 +2831,10 @@ body{
 
     document.querySelectorAll("[data-action='openOrder']").forEach(btn => {
       btn.addEventListener("click", openOrderDrawer);
+    });
+
+    document.querySelectorAll("[data-action='openArtistContact']").forEach(btn => {
+      btn.addEventListener("click", openArtistDrawer);
     });
 
     // Nav actions
