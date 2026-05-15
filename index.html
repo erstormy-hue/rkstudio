@@ -1838,6 +1838,7 @@ body{
         "podcast intro",
         "film music",
         "alternative",
+        "rock",
         "jazzy",
         "rnb",
         "edm",
@@ -1958,6 +1959,12 @@ body{
           ]
         },
         {
+          id: "rock",
+          label: { nb: "Rock", en: "Rock" },
+          sub:   { nb: "Gitar / driv / energi", en: "Guitar / drive / energy" },
+          tracks: []
+        },
+        {
           id: "jazzy",
           label: { nb: "Jazzy", en: "Jazzy" },
           sub:   { nb: "Swing / lounge / neo-jazz", en: "Swing / lounge / neo-jazz" },
@@ -1969,7 +1976,7 @@ body{
       ]
     };
 
-    const DAILY_ROTATING_GENRES = new Set(["film", "podcast", "pop", "rnb", "edm", "ambient", "country", "alternative", "jazzy"]);
+    const DAILY_ROTATING_GENRES = new Set(["film", "podcast", "pop", "rnb", "edm", "ambient", "country", "alternative", "rock", "jazzy"]);
     const GITHUB_REPO_OWNER = "erstormy-hue";
     const GITHUB_REPO_NAME = "rkstudio";
     const GENRE_AUDIO_FOLDERS = {
@@ -1980,6 +1987,7 @@ body{
       ambient: "classical-ambient",
       country: "country-americana",
       alternative: "alternative",
+      rock: "rock",
       jazzy: "jazzy"
     };
 
